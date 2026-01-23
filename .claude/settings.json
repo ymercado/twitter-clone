@@ -1,0 +1,6 @@
+{
+  "enabledPlugins": {
+    "compound-engineering@every-marketplace": true,
+    "vercel@claude-plugins-official": true
+  }
+}

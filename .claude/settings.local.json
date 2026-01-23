@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:ui.shadcn.com)",
+      "WebFetch(domain:shadcnexamples.com)",
+      "WebFetch(domain:css-tricks.com)",
+      "WebFetch(domain:blog.karenying.com)",
+      "WebFetch(domain:zustand.docs.pmnd.rs)",
+      "Bash(open:*)",
+      "Skill(compound-engineering:deepen-plan)",
+      "Skill(compound-engineering:workflows:work)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
