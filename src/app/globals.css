@@ -1,0 +1,158 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* X/Twitter "Lights Out" Dark Theme */
+@theme inline {
+  /* Core colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+
+  /* Text colors */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+
+  /* Brand colors */
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-like: var(--like);
+  --color-like-hover: var(--like-hover);
+  --color-repost: var(--repost);
+  --color-repost-hover: var(--repost-hover);
+
+  /* Shadcn compatibility */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-destructive: var(--destructive);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Fonts */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Radii */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+:root {
+  --radius: 1rem;
+
+  /* X "Lights Out" color palette */
+  --background: #000000;
+  --surface: #16181C;
+  --border: #2F3336;
+
+  /* Text - WCAG AA compliant */
+  --text-primary: #E7E9EA;
+  --text-secondary: #8B8F94;
+
+  /* Brand colors */
+  --accent: #1D9BF0;
+  --accent-hover: #1A8CD8;
+  --like: #F91880;
+  --like-hover: #D81B60;
+  --repost: #00BA7C;
+  --repost-hover: #00A86B;
+
+  /* Shadcn mappings */
+  --foreground: #E7E9EA;
+  --primary: #1D9BF0;
+  --primary-foreground: #FFFFFF;
+  --secondary: #16181C;
+  --secondary-foreground: #E7E9EA;
+  --muted: #16181C;
+  --muted-foreground: #8B8F94;
+  --card: #16181C;
+  --card-foreground: #E7E9EA;
+  --popover: #16181C;
+  --popover-foreground: #E7E9EA;
+  --destructive: #F4212E;
+  --input: #2F3336;
+  --ring: #1D9BF0;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar for X feel */
+  ::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2F3336;
+    border: 4px solid transparent;
+    border-radius: 8px;
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #404447;
+    border: 4px solid transparent;
+    background-clip: padding-box;
+  }
+}
+
+@layer utilities {
+  /* X-style hover backgrounds */
+  .hover-surface {
+    @apply transition-colors duration-200;
+  }
+
+  .hover-surface:hover {
+    background-color: rgba(231, 233, 234, 0.1);
+  }
+
+  /* Action button hover states */
+  .action-reply:hover {
+    color: #1D9BF0;
+    background-color: rgba(29, 155, 240, 0.1);
+  }
+
+  .action-repost:hover {
+    color: #00BA7C;
+    background-color: rgba(0, 186, 124, 0.1);
+  }
+
+  .action-like:hover {
+    color: #F91880;
+    background-color: rgba(249, 24, 128, 0.1);
+  }
+
+  /* Text truncation */
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
