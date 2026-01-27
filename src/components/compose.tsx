@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { ImageIcon, Smile, MapPin, CalendarDays } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { useCurrentUser, useTweetActions } from "@/lib/store";
+import { useCurrentUser, getStoreActions } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
 const MAX_CHARS = 280;
@@ -25,7 +25,6 @@ export function Compose({
   const [isFocused, setIsFocused] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const currentUser = useCurrentUser();
-  const { addTweet } = useTweetActions();
 
   const charsRemaining = MAX_CHARS - content.length;
   const isOverLimit = charsRemaining < 0;
@@ -34,6 +33,7 @@ export function Compose({
   const handleSubmit = () => {
     if (!canPost || !currentUser) return;
 
+    const { addTweet } = getStoreActions();
     addTweet(content.trim(), currentUser.id);
     setContent("");
     setIsFocused(false);

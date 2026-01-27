@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { useCurrentUserId, useUserActions } from "@/lib/store";
+import { useCurrentUserId, getStoreActions } from "@/lib/store";
 import { formatCount } from "@/lib/data";
 import type { User } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -18,7 +18,6 @@ interface ProfileHeaderProps {
 export function ProfileHeader({ user, tweetsCount }: ProfileHeaderProps) {
   const router = useRouter();
   const currentUserId = useCurrentUserId();
-  const { followUser, unfollowUser } = useUserActions();
 
   const isOwnProfile = currentUserId === user.id;
   const joinedDate = new Date(user.joinedAt).toLocaleDateString("en-US", {
@@ -27,6 +26,7 @@ export function ProfileHeader({ user, tweetsCount }: ProfileHeaderProps) {
   });
 
   const handleFollowToggle = () => {
+    const { followUser, unfollowUser } = getStoreActions();
     if (user.isFollowing) {
       unfollowUser(user.id);
     } else {

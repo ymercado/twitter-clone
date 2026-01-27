@@ -12,7 +12,7 @@ import {
   Bookmark,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useUserById, useTweetActions } from "@/lib/store";
+import { useUserById, getStoreActions } from "@/lib/store";
 import { formatRelativeTime, formatCount } from "@/lib/data";
 import type { Tweet as TweetType } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -23,12 +23,12 @@ interface TweetProps {
 
 export function Tweet({ tweet }: TweetProps) {
   const author = useUserById(tweet.authorId);
-  const { likeTweet, unlikeTweet, repostTweet, unrepostTweet } = useTweetActions();
   const [showLikeAnimation, setShowLikeAnimation] = useState(false);
 
   if (!author) return null;
 
   const handleLike = () => {
+    const { likeTweet, unlikeTweet } = getStoreActions();
     if (tweet.isLiked) {
       unlikeTweet(tweet.id);
     } else {
@@ -39,6 +39,7 @@ export function Tweet({ tweet }: TweetProps) {
   };
 
   const handleRepost = () => {
+    const { repostTweet, unrepostTweet } = getStoreActions();
     if (tweet.isReposted) {
       unrepostTweet(tweet.id);
     } else {

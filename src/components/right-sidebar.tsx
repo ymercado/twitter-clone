@@ -5,12 +5,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { trendingTopics } from "@/lib/data";
 import { formatCount } from "@/lib/data";
-import { useUserActions, useUsers } from "@/lib/store";
+import { getStoreActions, useUsers } from "@/lib/store";
 import Link from "next/link";
 
 export function RightSidebar() {
   const users = useUsers();
-  const { followUser } = useUserActions();
 
   // Get users to suggest (not following)
   const suggestedUsers = users
@@ -93,7 +92,7 @@ export function RightSidebar() {
                   variant="outline"
                   size="sm"
                   className="rounded-full font-bold bg-white text-black hover:bg-white/90 border-0 h-8 px-4"
-                  onClick={() => followUser(user.id)}
+                  onClick={() => getStoreActions().followUser(user.id)}
                 >
                   Follow
                 </Button>

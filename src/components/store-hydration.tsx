@@ -1,15 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
-import { useStore, initializeStore } from "@/lib/store";
-
+// This component doesn't need to do anything special anymore.
+// The persist middleware handles hydration automatically.
+// We keep this component for future hydration-related needs.
 export function StoreHydration() {
-  useEffect(() => {
-    // Rehydrate the persisted store on client
-    useStore.persist.rehydrate();
-    // Initialize with mock data if empty
-    initializeStore();
-  }, []);
-
   return null;
 }
