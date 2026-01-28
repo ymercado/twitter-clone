@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
+import { useShallow } from "zustand/react/shallow";
 import type { Tweet, User, TweetId, UserId } from "@/lib/types";
 import { createTweetId } from "@/lib/types";
 import { mockTweets, mockUsers } from "@/lib/data";
@@ -154,22 +155,30 @@ export const useStore = create<AppStore>()(
   )
 );
 
-// Selectors for optimal re-renders
-export const useTweets = () => useStore((state) => state.tweets);
-export const useUsers = () => useStore((state) => state.users);
+// Selectors for optimal re-renders with useShallow to prevent unnecessary re-renders
+export const useTweets = () => useStore(useShallow((state) => state.tweets));
+export const useUsers = () => useStore(useShallow((state) => state.users));
 export const useCurrentUserId = () => useStore((state) => state.currentUserId);
 export const useCurrentUser = () =>
-  useStore((state) => state.users.find((u) => u.id === state.currentUserId));
+  useStore(
+    useShallow((state) => state.users.find((u) => u.id === state.currentUserId))
+  );
 export const useHasHydrated = () => useStore((state) => state._hasHydrated);
 
-export const useTweetById = (tweetId: string) =>
-  useStore((state) => state.tweets.find((t) => t.id === tweetId));
+export const useTweetById = (tweetId: TweetId) =>
+  useStore(
+    useShallow((state) => state.tweets.find((t) => t.id === tweetId))
+  );
 
-export const useUserById = (userId: string) =>
-  useStore((state) => state.users.find((u) => u.id === userId));
+export const useUserById = (userId: UserId) =>
+  useStore(
+    useShallow((state) => state.users.find((u) => u.id === userId))
+  );
 
-export const useTweetsByUser = (userId: string) =>
-  useStore((state) => state.tweets.filter((t) => t.authorId === userId));
+export const useTweetsByUser = (userId: UserId) =>
+  useStore(
+    useShallow((state) => state.tweets.filter((t) => t.authorId === userId))
+  );
 
 // Actions - access directly from store to avoid creating new objects
 export const getStoreActions = () => {

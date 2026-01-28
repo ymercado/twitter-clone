@@ -99,6 +99,30 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  /* Focus visible styles for keyboard accessibility (WCAG 2.4.7) */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Ensure focus is visible even on elements with outline-none */
+  .outline-none:focus-visible,
+  [class*="outline-none"]:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* Better focus states for buttons and links */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  [role="button"]:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
   /* Custom scrollbar for X feel */
   ::-webkit-scrollbar {
     width: 16px;
